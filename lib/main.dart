@@ -57,8 +57,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  MaterialColor mycolor = MaterialColor(
-      const Color.fromRGBO(107, 107, 191, 1).value, const <int, Color>{
+  MaterialColor mycolor = MaterialColor(const Color.fromRGBO(107, 107, 191, 1).value, const <int, Color>{
     50: Color.fromRGBO(107, 107, 191, 0.1),
     100: Color.fromRGBO(107, 107, 191, 0.2),
     200: Color.fromRGBO(107, 107, 191, 0.3),
@@ -75,7 +74,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Health Monitoring App',
+      title: 'IskoMed',
       initialRoute: '/',
       routes: {
         // insert routes for screens here

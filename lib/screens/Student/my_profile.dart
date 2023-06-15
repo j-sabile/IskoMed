@@ -35,8 +35,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     PermissionStatus res;
     res = await Permission.storage.request();
     if (res.isGranted) {
-      final boundary =
-          qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final boundary = qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
       // We can increse the size of QR using pixel ratio
       final image = await boundary.toImage(pixelRatio: 5.0);
       final byteData = await (image.toByteData(format: ui.ImageByteFormat.png));
@@ -50,8 +49,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
         imgFile.writeAsBytes(pngBytes);
         GallerySaver.saveImage(imgFile.path).then((success) async {
           //In here you can show snackbar or do something in the backend at successfull download
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Successfully saved QR to device.')));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Successfully saved QR to device.')));
         });
       }
     }
@@ -59,18 +57,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.entry.date);
-    print(widget.entry.noSymptoms);
-
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/background.png"), fit: BoxFit.cover)),
         child: FutureBuilder(
           future: context.read<EntriesProvider>().getEntryTodayId(),
           builder: (context, snapshot) {
@@ -83,14 +72,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Text("Did not generate QR because: ",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF6B6BBF))),
+                  Text("Did not generate QR because: ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF6B6BBF))),
                   Text("You don't have a health entry for today.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, color: Color(0xFF6B6BBF))),
+                      textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: Color(0xFF6B6BBF))),
                 ],
               ));
             } else if (widget.userType == "Student") {
@@ -108,19 +92,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return Column(
       children: [
         Column(children: [
-          const Icon(Icons.person,
-              size: 90, color: Color.fromRGBO(85, 87, 152, 1)),
-          Text(student.username,
-              style: const TextStyle(
-                  color: Color.fromRGBO(85, 87, 152, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold))
+          const Icon(Icons.person, size: 90, color: Color.fromRGBO(85, 87, 152, 1)),
+          Text(student.username, style: const TextStyle(color: Color.fromRGBO(85, 87, 152, 1), fontSize: 16, fontWeight: FontWeight.bold))
         ]),
         const SizedBox(height: 8),
         Card(
           shape: RoundedRectangleBorder(
-            side: const BorderSide(
-                width: 2, color: Color.fromRGBO(85, 87, 152, 1)),
+            side: const BorderSide(width: 2, color: Color.fromRGBO(85, 87, 152, 1)),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -129,18 +107,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("Student Number: ${student.studentNumber}")),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("Name: ${student.name}")),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("Course: ${student.course}")),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("College: ${student.college}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Student Number: ${student.studentNumber}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Name: ${student.name}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Course: ${student.course}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("College: ${student.college}")),
               ],
             ),
           ),
@@ -149,8 +119,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     );
   }
 
-  FutureBuilder studentFutureBuilder(
-      BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+  FutureBuilder studentFutureBuilder(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
     return FutureBuilder(
       future: context.read<EntriesProvider>().getStudentInfo(),
       builder: (context, studentSnapshot) {
@@ -160,8 +129,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
           return Text('Error: ${studentSnapshot.error}');
         } else if (studentSnapshot.data == "error") {
           return const Center(child: (Text("Error getting student info!")));
-        } else if (widget.entry.noSymptoms == true &&
-            studentSnapshot.data!.status != "quarantined") {
+        } else if (widget.entry.noSymptoms == true && studentSnapshot.data!.status != "quarantined") {
           return showQRStudent(snapshot, studentSnapshot);
         } else {
           return showErrorStudent(snapshot, studentSnapshot);
@@ -173,78 +141,69 @@ class _MyProfilePageState extends State<MyProfilePage> {
   Center showQRStudent(AsyncSnapshot snapshot, AsyncSnapshot studentSnapshot) {
     var status = studentSnapshot.data!.status;
     return Center(
-        child: ListView(
-      shrinkWrap: true,
-      padding: const EdgeInsets.all(20),
-      children: <Widget>[
-        Column(
-          children: [
-            Padding(
-                padding: const EdgeInsets.all(5),
-                child: userInfo(studentSnapshot.data!)),
-            RepaintBoundary(
-              key: qrKey,
-              child: Column(
-                children: [
-                  Padding(
+      child: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(20),
+        children: <Widget>[
+          Column(
+            children: [
+              Padding(padding: const EdgeInsets.all(5), child: userInfo(studentSnapshot.data!)),
+              RepaintBoundary(
+                key: qrKey,
+                child: Column(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(5),
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
-                          side: const BorderSide(
-                              width: 5, color: Color(0xFF6B6BBF)),
+                          side: const BorderSide(width: 5, color: Color(0xFF6B6BBF)),
                         ),
                         child: QrImage(
                           data: snapshot.data!,
                           size: 250,
-                          embeddedImageStyle:
-                              QrEmbeddedImageStyle(size: const Size(90, 90)),
+                          embeddedImageStyle: QrEmbeddedImageStyle(size: const Size(90, 90)),
                         ),
-                      )),
-                  Padding(
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.all(5),
                       child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: const BorderSide(
-                                width: 3, color: Color(0xFFF8AE75)),
-                          ),
-                          child: Column(children: [
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: const BorderSide(width: 3, color: Color(0xFFF8AE75)),
+                        ),
+                        child: Column(
+                          children: [
                             Padding(
                                 padding: const EdgeInsets.all(8),
-                                child: Text("Date generated: $dateGenerated",
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Color(0xFF6B6BBF)))),
+                                child: Text("Date generated: $dateGenerated", style: const TextStyle(fontSize: 18, color: Color(0xFF6B6BBF)))),
                             Padding(
                                 padding: const EdgeInsets.all(8),
-                                child: Text(
-                                    "Valid until: $dateGenerated 11:59:59pm",
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Color(0xFF6B6BBF)))),
+                                child:
+                                    Text("Valid until: $dateGenerated 11:59:59pm", style: const TextStyle(fontSize: 18, color: Color(0xFF6B6BBF)))),
                             Padding(
                                 padding: const EdgeInsets.all(8),
-                                child: Text("Status: $status",
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Color(0xFF6B6BBF)))),
-                          ]))),
-                ],
+                                child: Text("Status: $status", style: const TextStyle(fontSize: 18, color: Color(0xFF6B6BBF)))),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-        ElevatedButton(
-          onPressed: takeScreenShot,
-          child: const Text('Save QR to Device'),
-        ),
-      ],
-    ));
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+            child: ElevatedButton(onPressed: takeScreenShot, child: const Text('Save QR to Device')),
+          )
+        ],
+      ),
+    );
   }
 
-  Widget showErrorStudent(
-      AsyncSnapshot snapshot, AsyncSnapshot studentSnapshot) {
+  Widget showErrorStudent(AsyncSnapshot snapshot, AsyncSnapshot studentSnapshot) {
     var isQuarantined;
     if (studentSnapshot.data!.status == "quarantined") {
       isQuarantined = true;
@@ -257,15 +216,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
             child: Column(children: [
           userInfo(studentSnapshot.data!),
           const SizedBox(height: 8),
-          const Text("You cannot generate QR code because:",
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF6B6BBF))),
-          Text(widget.entry.noSymptoms ? "" : "You have symptoms",
-              style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF))),
-          Text(isQuarantined ? "You are quarantined" : "",
-              style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF)))
+          const Text("You cannot generate QR code because:", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF6B6BBF))),
+          Text(widget.entry.noSymptoms ? "" : "You have symptoms", style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF))),
+          Text(isQuarantined ? "You are quarantined" : "", style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF)))
         ])));
   }
 
@@ -273,19 +226,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return Column(
       children: [
         Column(children: [
-          const Icon(Icons.person,
-              size: 90, color: Color.fromRGBO(85, 87, 152, 1)),
-          Text(adminMonitor.email,
-              style: const TextStyle(
-                  color: Color.fromRGBO(85, 87, 152, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold))
+          const Icon(Icons.person, size: 90, color: Color.fromRGBO(85, 87, 152, 1)),
+          Text(adminMonitor.email, style: const TextStyle(color: Color.fromRGBO(85, 87, 152, 1), fontSize: 16, fontWeight: FontWeight.bold))
         ]),
         const SizedBox(height: 8),
         Card(
           shape: RoundedRectangleBorder(
-            side: const BorderSide(
-                width: 2, color: Color.fromRGBO(85, 87, 152, 1)),
+            side: const BorderSide(width: 2, color: Color.fromRGBO(85, 87, 152, 1)),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -294,19 +241,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text(
-                        "Employee Number: ${adminMonitor.employeeNumber}")),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("Name: ${adminMonitor.name}")),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("Position: ${adminMonitor.position}")),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text("Home Unit: ${adminMonitor.homeUnit}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Employee Number: ${adminMonitor.employeeNumber}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Name: ${adminMonitor.name}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Position: ${adminMonitor.position}")),
+                Padding(padding: const EdgeInsets.all(5), child: Text("Home Unit: ${adminMonitor.homeUnit}")),
               ],
             ),
           ),
@@ -315,12 +253,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
     );
   }
 
-  FutureBuilder adminMonitorFutureBuilder(
-      BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+  FutureBuilder adminMonitorFutureBuilder(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
     return FutureBuilder(
-      future: context
-          .read<EntriesProvider>()
-          .getAdminOrMonitorInfo(widget.userType),
+      future: context.read<EntriesProvider>().getAdminOrMonitorInfo(widget.userType),
       builder: (context, adminMonitorSnapshot) {
         if (adminMonitorSnapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -328,8 +263,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
           return Text('Error: ${adminMonitorSnapshot.error}');
         } else if (adminMonitorSnapshot.data == "error") {
           return const Center(child: (Text("Error getting student info!")));
-        } else if (widget.entry.noSymptoms == true &&
-            adminMonitorSnapshot.data!.status != "quarantined") {
+        } else if (widget.entry.noSymptoms == true && adminMonitorSnapshot.data!.status != "quarantined") {
           return showQRAdminMonitor(snapshot, adminMonitorSnapshot);
         } else {
           return showErrorAdminMonitor(snapshot, adminMonitorSnapshot);
@@ -338,8 +272,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     );
   }
 
-  Center showQRAdminMonitor(
-      AsyncSnapshot snapshot, AsyncSnapshot adminMonitorSnapshot) {
+  Center showQRAdminMonitor(AsyncSnapshot snapshot, AsyncSnapshot adminMonitorSnapshot) {
     var status = adminMonitorSnapshot.data!.status;
     return Center(
         child: ListView(
@@ -348,9 +281,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       children: <Widget>[
         Column(
           children: [
-            Padding(
-                padding: const EdgeInsets.all(5),
-                child: adminOrMonitorInfo(adminMonitorSnapshot.data!)),
+            Padding(padding: const EdgeInsets.all(5), child: adminOrMonitorInfo(adminMonitorSnapshot.data!)),
             Padding(
                 padding: const EdgeInsets.all(5),
                 child: Card(
@@ -363,8 +294,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       child: QrImage(
                         data: snapshot.data!,
                         size: 250,
-                        embeddedImageStyle:
-                            QrEmbeddedImageStyle(size: const Size(90, 90)),
+                        embeddedImageStyle: QrEmbeddedImageStyle(size: const Size(90, 90)),
                       )),
                 )),
             Padding(
@@ -372,25 +302,18 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side:
-                          const BorderSide(width: 3, color: Color(0xFFF8AE75)),
+                      side: const BorderSide(width: 3, color: Color(0xFFF8AE75)),
                     ),
                     child: Column(children: [
                       Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text("Date generated: $dateGenerated",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Color(0xFF6B6BBF)))),
+                          child: Text("Date generated: $dateGenerated", style: const TextStyle(fontSize: 18, color: Color(0xFF6B6BBF)))),
                       Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text("Valid until: $dateGenerated 11:59:59pm",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Color(0xFF6B6BBF)))),
+                          child: Text("Valid until: $dateGenerated 11:59:59pm", style: const TextStyle(fontSize: 18, color: Color(0xFF6B6BBF)))),
                       Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text("Status: $status",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Color(0xFF6B6BBF)))),
+                          child: Text("Status: $status", style: const TextStyle(fontSize: 18, color: Color(0xFF6B6BBF)))),
                     ]))),
           ],
         ),
@@ -402,8 +325,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     ));
   }
 
-  Widget showErrorAdminMonitor(
-      AsyncSnapshot snapshot, AsyncSnapshot adminMonitorSnapshot) {
+  Widget showErrorAdminMonitor(AsyncSnapshot snapshot, AsyncSnapshot adminMonitorSnapshot) {
     var isQuarantined;
     if (adminMonitorSnapshot.data!.status == "quarantined") {
       isQuarantined = true;
@@ -416,15 +338,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
             child: Column(children: [
           adminOrMonitorInfo(adminMonitorSnapshot.data!),
           const SizedBox(height: 8),
-          const Text("You cannot generate QR code because:",
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF6B6BBF))),
-          Text(widget.entry.noSymptoms ? "" : "You have symptoms",
-              style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF))),
-          Text(isQuarantined ? "You are quarantined" : "",
-              style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF)))
+          const Text("You cannot generate QR code because:", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF6B6BBF))),
+          Text(widget.entry.noSymptoms ? "" : "You have symptoms", style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF))),
+          Text(isQuarantined ? "You are quarantined" : "", style: const TextStyle(fontSize: 20, color: Color(0xFF6B6BBF)))
         ])));
   }
 }
