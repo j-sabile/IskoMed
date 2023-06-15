@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -44,40 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDxVV_reGGe0W4Khf93qpKvE_LFeqzm7v0',
-    appId: '1:434254220951:web:a1254798f1b0068fc5e3d2',
-    messagingSenderId: '434254220951',
-    projectId: 'health-monitor-project23',
-    authDomain: 'health-monitor-project23.firebaseapp.com',
-    storageBucket: 'health-monitor-project23.appspot.com',
-    measurementId: 'G-ZJVRSTTP7F',
+    apiKey: 'AIzaSyAUEEEmJDF1_6bMq3a0UtRlkdIaBx8Euzo',
+    appId: '1:924503561966:web:21d5fe50e57d4f5df345ff',
+    messagingSenderId: '924503561966',
+    projectId: 'iskomed-7d7b4',
+    authDomain: 'iskomed-7d7b4.firebaseapp.com',
+    storageBucket: 'iskomed-7d7b4.appspot.com',
+    measurementId: 'G-ZD1RJY5L2D',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDNScROaBC_Q02GiuvdxSdAQnuVRj1L-a4',
-    appId: '1:434254220951:android:998f64342bd6ef42c5e3d2',
-    messagingSenderId: '434254220951',
-    projectId: 'health-monitor-project23',
-    storageBucket: 'health-monitor-project23.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAiRw--MrD1EXha-zxKbTcDbigEQ-Y2hmM',
-    appId: '1:434254220951:ios:659fda10526ec708c5e3d2',
-    messagingSenderId: '434254220951',
-    projectId: 'health-monitor-project23',
-    storageBucket: 'health-monitor-project23.appspot.com',
-    iosClientId: '434254220951-9ahh7ckfcnq3egm9bsao4s1517ppbsfi.apps.googleusercontent.com',
-    iosBundleId: 'com.example.healthMonitor',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAiRw--MrD1EXha-zxKbTcDbigEQ-Y2hmM',
-    appId: '1:434254220951:ios:659fda10526ec708c5e3d2',
-    messagingSenderId: '434254220951',
-    projectId: 'health-monitor-project23',
-    storageBucket: 'health-monitor-project23.appspot.com',
-    iosClientId: '434254220951-9ahh7ckfcnq3egm9bsao4s1517ppbsfi.apps.googleusercontent.com',
-    iosBundleId: 'com.example.healthMonitor',
+    apiKey: 'AIzaSyCmVkOSQfgDKY9GPdJi0ydaKraaQJT17t4',
+    appId: '1:924503561966:android:24905f26e241e522f345ff',
+    messagingSenderId: '924503561966',
+    projectId: 'iskomed-7d7b4',
+    storageBucket: 'iskomed-7d7b4.appspot.com',
   );
 }

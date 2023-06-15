@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "434254220951",
-    "project_id": "health-monitor-project23",
-    "storage_bucket": "health-monitor-project23.appspot.com"
+    "project_number": "924503561966",
+    "project_id": "iskomed-7d7b4",
+    "storage_bucket": "iskomed-7d7b4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:434254220951:android:998f64342bd6ef42c5e3d2",
+        "mobilesdk_app_id": "1:924503561966:android:24905f26e241e522f345ff",
         "android_client_info": {
           "package_name": "com.example.health_monitor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "434254220951-4l79773bjlmu3r9sf32ruffskuenlpr5.apps.googleusercontent.com",
+          "client_id": "924503561966-jvojfk841p3f0r8dk4o6c0hjitgnr3vj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDNScROaBC_Q02GiuvdxSdAQnuVRj1L-a4"
+          "current_key": "AIzaSyCmVkOSQfgDKY9GPdJi0ydaKraaQJT17t4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "434254220951-4l79773bjlmu3r9sf32ruffskuenlpr5.apps.googleusercontent.com",
+              "client_id": "924503561966-jvojfk841p3f0r8dk4o6c0hjitgnr3vj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
