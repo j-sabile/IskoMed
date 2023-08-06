@@ -2,15 +2,6 @@
 
 <img src="assets/images/logo.png" width="300">
 
-## Group Details
-    CMSC 23 B-7L Group 2
-
-    Developers:
-        Arawela Lou G. Delmo
-        Gabrielle Bailey P. Fuentes
-        Aleezah Maye P. Rolle
-        Jerico P. Sabile
-
 ## Program Description
 IskoMed: A Health Monitoring App
 
@@ -119,3 +110,9 @@ Here is a flow of the application based on the provided screens and functionalit
    - The monitor can update the logs, including location, student number, and status (cleared, under monitoring, under quarantine).
 
    - The entrance monitor can perform all the functionalities available in the user's view.
+
+## Developers:
+    Arawela Lou G. Delmo
+    Gabrielle Bailey P. Fuentes
+    Aleezah Maye P. Rolle
+    Jerico P. Sabile
